@@ -5,7 +5,7 @@ import Image from "next/image"
 
 function TableCard() {
   return (
-    <div className="group max-w-sm relative">
+    <div className="group w-sm max-w-sm relative">
       <div className=" relative w-sm max-w-sm h-46 overflow-hidden rounded-md">
         <Image src={'/images/table.jpg'} alt="Food" width={300} height={200} className="absolute w-full h-full object-cover "/>
       </div>

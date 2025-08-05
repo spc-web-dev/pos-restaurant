@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { FaBowlFood } from "react-icons/fa6";
 import { RiDrinks2Fill } from "react-icons/ri";
 import { TbTableSpark } from "react-icons/tb";
+import { Home } from 'lucide-react';
 
 function HomeAppSidebar() {
   return (
@@ -15,6 +16,14 @@ function HomeAppSidebar() {
         <SidebarContent>
             <SidebarGroup>
               <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href={'/'}>
+                      <Home />
+                      <span>Homepage</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
                     <Link href={'/foods'}>
