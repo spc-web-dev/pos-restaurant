@@ -36,7 +36,7 @@ function HomeAppSidebar() {
                   <SidebarMenuButton asChild>
                     <Link href={'/drinks'}>
                       <RiDrinks2Fill />
-                      <span>Drinks</span>
+                      <span>Beverages</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
