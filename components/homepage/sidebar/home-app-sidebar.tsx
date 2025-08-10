@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { FaBowlFood } from "react-icons/fa6";
 import { RiDrinks2Fill } from "react-icons/ri";
-import { TbTableSpark } from "react-icons/tb";
+import { TbReport, TbTableSpark } from "react-icons/tb";
 import { Home } from 'lucide-react';
 
 function HomeAppSidebar() {
@@ -48,11 +48,19 @@ function HomeAppSidebar() {
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href={'/reports'}>
+                      <TbReport />
+                      <span>Reports</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-          <Button>avatar</Button>
+          <Button variant={'secondary'}>avatar</Button>
         </SidebarFooter>
     </Sidebar>
   )

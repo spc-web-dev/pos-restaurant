@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -12,21 +12,19 @@ import {
   SortingState,
   useReactTable,
   VisibilityState,
-} from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+} from "@tanstack/react-table";
+import { ArrowUpDown, ChevronDown, Eye, MoreHorizontal } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -34,85 +32,85 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Badge } from "./ui/badge"
+} from "@/components/ui/table";
+import { Badge } from "./ui/badge";
 
-      const data = [
-    {
-      id: "#ORD-001",
-      customer: "Table 5",
-      items: "2x Burger, 1x Fries, 2x Coke",
-      total: "$28.50",
-      status: "completed",
-      time: "2 min ago",
-    },
-    {
-      id: "#ORD-002",
-      customer: "Table 12",
-      items: "1x Pizza Margherita, 1x Wine",
-      total: "$35.00",
-      status: "preparing",
-      time: "5 min ago",
-    },
-    {
-      id: "#ORD-003",
-      customer: "Takeaway",
-      items: "3x Coffee, 2x Sandwich",
-      total: "$22.75",
-      status: "ready",
-      time: "8 min ago",
-    },
-    {
-      id: "#ORD-004",
-      customer: "Table 3",
-      items: "1x Steak, 1x Salad, 1x Beer",
-      total: "$45.00",
-      status: "preparing",
-      time: "12 min ago",
-    },
-    {
-      id: "#ORD-005",
-      customer: "Table 8",
-      items: "2x Pasta, 1x Garlic Bread",
-      total: "$32.00",
-      status: "completed",
-      time: "15 min ago",
-    },
-  ]
+const data = [
+  {
+    id: "#ORD-001",
+    customer: "Table 5",
+    items: "2x Burger, 1x Fries, 2x Coke",
+    total: 28.50,
+    status: "completed",
+    time: "2 min ago",
+  },
+  {
+    id: "#ORD-002",
+    customer: "Table 12",
+    items: "1x Pizza Margherita, 1x Wine",
+    total: 35.0,
+    status: "preparing",
+    time: "5 min ago",
+  },
+  {
+    id: "#ORD-003",
+    customer: "Takeaway",
+    items: "3x Coffee, 2x Sandwich",
+    total: 22.75,
+    status: "ready",
+    time: "8 min ago",
+  },
+  {
+    id: "#ORD-004",
+    customer: "Table 3",
+    items: "1x Steak, 1x Salad, 1x Beer",
+    total: 45.0,
+    status: "preparing",
+    time: "12 min ago",
+  },
+  {
+    id: "#ORD-005",
+    customer: "Table 8",
+    items: "2x Pasta, 1x Garlic Bread",
+    total: 32.0,
+    status: "completed",
+    time: "15 min ago",
+  },
+];
 
-   const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "completed":
-        return (
-          <Badge variant="default" className="bg-green-500">
-            Completed
-          </Badge>
-        )
-      case "preparing":
-        return (
-          <Badge variant="secondary" className="bg-yellow-500 text-white">
-            Preparing
-          </Badge>
-        )
-      case "ready":
-        return (
-          <Badge variant="outline" className="border-blue-500 text-blue-500">
-            Ready
-          </Badge>
-        )
-      default:
-        return <Badge variant="outline">{status}</Badge>
-    }
+const getStatusBadge = (status: string) => {
+  switch (status) {
+    case "completed":
+      return (
+        <Badge variant="default" className="bg-green-500">
+          Completed
+        </Badge>
+      );
+    case "preparing":
+      return (
+        <Badge variant="secondary" className="bg-yellow-500 text-white">
+          Preparing
+        </Badge>
+      );
+    case "ready":
+      return (
+        <Badge variant="outline" className="border-blue-500 text-blue-500">
+          Ready
+        </Badge>
+      );
+    default:
+      return <Badge variant="outline">{status}</Badge>;
   }
+};
 
-  type RecentOrder = {
-    id: string
-    customer: string
-    items: string
-    total: string
-    status: "completed" | "preparing" | "ready" | string
-    time: string
-  }
+type RecentOrder = {
+  id: string;
+  customer: string;
+  items: string;
+  total: number;
+  status: "completed" | "preparing" | "ready" | string;
+  time: string;
+};
 
 export const columns: ColumnDef<RecentOrder>[] = [
   {
@@ -138,6 +136,34 @@ export const columns: ColumnDef<RecentOrder>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: "id",
+    header: () => <div className="text-left">Order ID</div>,
+    cell: ({ row }) => {
+      return <div className="text-left">{row.getValue("id")}</div>;
+    },
+  },
+  {
+    accessorKey: "customer",
+    header: () => <div className="text-left">Customer</div>,
+    cell: ({ row }) => {
+      return <div className="text-left">{row.getValue("customer")}</div>;
+    },
+  },
+  {
+    accessorKey: "items",
+    header: () => <div className="text-left">Items</div>,
+    cell: ({ row }) => {
+      return <div className="text-left">{row.getValue("items")}</div>;
+    },
+  },
+  {
+    accessorKey: "time",
+    header: () => <div className="text-right">Time</div>,
+    cell: ({ row }) => {
+      return <div className="text-right">{row.getValue("time")}</div>;
+    },
+  },
+  {
     accessorKey: "status",
     header: ({ column }) => {
       return (
@@ -148,64 +174,61 @@ export const columns: ColumnDef<RecentOrder>[] = [
           Status
           <ArrowUpDown />
         </Button>
-      )
+      );
     },
-    cell: ({ row }) => <div className="">{getStatusBadge(row.getValue("status"))}</div>,
+    cell: ({ row }) => (
+      <div className="">{getStatusBadge(row.getValue("status"))}</div>
+    ),
   },
   {
     accessorKey: "total",
     header: () => <div className="text-right">Total</div>,
     cell: ({ row }) => {
-      const total = parseFloat(row.getValue("total"))
+      const total = parseFloat(row.getValue("total"));
 
       // Format the total as a dollar amount
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(total)
+      }).format(total);
 
-      return <div className="text-right font-medium">{formatted}</div>
+      return <div className="text-right font-medium">{formatted}</div>;
     },
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
+            <Button variant="ghost" size="icon">
+              <MoreHorizontal className="h-4 w-4" />
+              <span className="sr-only">Actions</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
+            <DropdownMenuItem>
+              <Eye className="h-4 w-4 mr-2" />
+              View Details
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>Print Receipt</DropdownMenuItem>
+            <DropdownMenuItem>Refund Order</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];
 
 export default function RecentOrdersTable() {
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
-  )
+  );
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
     data,
@@ -224,16 +247,16 @@ export default function RecentOrdersTable() {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter customers..."
+          value={(table.getColumn("customer")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("customer")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -259,7 +282,7 @@ export default function RecentOrdersTable() {
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-                )
+                );
               })}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -279,7 +302,7 @@ export default function RecentOrdersTable() {
                             header.getContext()
                           )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -339,5 +362,5 @@ export default function RecentOrdersTable() {
         </div>
       </div>
     </div>
-  )
+  );
 }
