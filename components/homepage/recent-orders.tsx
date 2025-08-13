@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import RecentOrdersTable from "../recent-orders-table";
+import RecentOrdersTable from "./recent-orders-table";
 
 function RecentOrders() {
   return (

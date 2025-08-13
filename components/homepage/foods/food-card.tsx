@@ -9,7 +9,7 @@ import Image from "next/image"
 
 function FoodCard() {
   return (
-    <Card className="max-w-sm p-0">
+    <Card className="max-w-sm min-w-sm p-0">
       <CardHeader className="hidden">
         <CardTitle>Food Card</CardTitle>
       </CardHeader>
