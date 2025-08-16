@@ -107,7 +107,7 @@ const columns: ColumnDef<DataColumn>[] = [
     id:'Rank',
     header: 'Rank',
     cell: ({ row }) => {
-        return (<span>{row.index === 0 || row.index === 1 || row.index === 2 ? '⭐ #' : ''}{row.index + 1}</span>)
+        return (<span className={`${row.index >= 0 && row.index <= 2 && 'text-green-500'}`}>{row.index === 0 || row.index === 1 || row.index === 2 ? '⭐ #' : ''}{row.index + 1}</span>)
     },
   },
   {
