@@ -1,29 +1,20 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   IconBrandProducthunt,
   IconCamera,
-  IconChartBar,
   IconDashboard,
-  IconDatabase,
   IconFileAi,
   IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
   IconInnerShadowTop,
-  IconListDetails,
   IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers,
-} from "@tabler/icons-react"
+  IconWaterpolo,
+} from "@tabler/icons-react";
 
-import { NavDocuments } from "@/components/dashboard/sidebar/nav-documents"
-import { NavMain } from "@/components/dashboard/sidebar/nav-main"
-import { NavSecondary } from "@/components/dashboard/sidebar/nav-secondary"
-import { NavUser } from "@/components/dashboard/sidebar/nav-user"
+import { NavDocuments } from "@/components/dashboard/sidebar/nav-documents";
+import { NavMain } from "@/components/dashboard/sidebar/nav-main";
+import { NavUser } from "@/components/dashboard/sidebar/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -32,7 +23,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { IoFastFoodOutline } from "react-icons/io5";
+import { RiDrinks2Line, RiPrinterLine, RiTableLine, RiUserSettingsLine } from "react-icons/ri";
 
 const data = {
   user: {
@@ -52,19 +45,9 @@ const data = {
       icon: IconBrandProducthunt,
     },
     {
-      title: "Analytics",
+      title: "Reports",
       url: "#",
-      icon: IconChartBar,
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: IconUsers,
+      icon: IconReport,
     },
   ],
   navClouds: [
@@ -115,41 +98,34 @@ const data = {
       ],
     },
   ],
-  navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-      icon: IconSettings,
-    },
-    {
-      title: "Get Help",
-      url: "#",
-      icon: IconHelp,
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
-    },
-  ],
   documents: [
     {
-      name: "Data Library",
+      name: "Foods",
       url: "#",
-      icon: IconDatabase,
+      icon: IoFastFoodOutline,
     },
     {
-      name: "Reports",
+      name: "Beverages",
       url: "#",
-      icon: IconReport,
+      icon: RiDrinks2Line,
     },
     {
-      name: "Word Assistant",
+      name: "Tables",
       url: "#",
-      icon: IconFileWord,
+      icon: RiTableLine,
     },
+    {
+      name: "Printers",
+      url: "#",
+      icon: RiPrinterLine,
+    },
+    {
+      name: "Users",
+      url: "#",
+      icon: RiUserSettingsLine,
+    }
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -172,11 +148,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

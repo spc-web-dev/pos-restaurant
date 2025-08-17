@@ -2,6 +2,7 @@
 
 import {
   IconDots,
+  IconEdit,
   IconFolder,
   IconShare3,
   IconTrash,
@@ -31,7 +32,7 @@ export function NavDocuments({
   items: {
     name: string
     url: string
-    icon: Icon
+    icon: Icon | React.ComponentType<React.SVGProps<SVGSVGElement>>
   }[]
 }) {
   const { isMobile } = useSidebar()
@@ -65,11 +66,11 @@ export function NavDocuments({
               >
                 <DropdownMenuItem>
                   <IconFolder />
-                  <span>Open</span>
+                  <span>Views</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <IconShare3 />
-                  <span>Share</span>
+                  <IconEdit />
+                  <span>Edit</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem variant="destructive">
@@ -80,12 +81,6 @@ export function NavDocuments({
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <IconDots className="text-sidebar-foreground/70" />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   )

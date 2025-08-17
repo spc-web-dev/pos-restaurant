@@ -10,10 +10,10 @@ export const config = {
       name: "Credentials",
       credentials: {
         username: { label: "username", type: "text", placeholder: "your username" },
-        password: { label: "Password", type: "password" }
+        password: { label: "password", type: "password" }
       },
       async authorize(credentials) {
-        const gateway_url = process.env.GATEWAY_URL || 'http://localhost:5000/api/v1'
+        const gateway_url = process.env.GATEWAY_URL
         if (!credentials?.username || !credentials?.password) {
           throw new Error('Missing username or password')
         }
@@ -28,12 +28,11 @@ export const config = {
           })
         })
         const user = await res.json()
-        if (res.ok && user) {
+        if (res.ok && user && user.message === 'Login successful') {
           return user
         } else {
           return null
         }
-
       }
     })
   ],

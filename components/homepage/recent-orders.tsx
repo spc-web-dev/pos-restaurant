@@ -1,4 +1,4 @@
-import React from "react";
+'use client'
 import {
   Card,
   CardHeader,
@@ -6,8 +6,11 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import RecentOrdersTable from "./recent-orders-table";
+import dynamic from "next/dynamic";
 
+const RecentOrdersTableNoSSR = dynamic(() => import("./recent-orders-table"), {
+  ssr: false,
+}); 
 function RecentOrders() {
   return (
     <div className="w-full">
@@ -17,7 +20,7 @@ function RecentOrders() {
           <CardDescription>Latest orders from your restaurant</CardDescription>
         </CardHeader>
         <CardContent className="">
-          <RecentOrdersTable />
+            <RecentOrdersTableNoSSR />
         </CardContent>
       </Card>
     </div>

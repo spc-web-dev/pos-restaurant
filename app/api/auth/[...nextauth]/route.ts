@@ -4,7 +4,6 @@ import type { NextAuthOptions } from "next-auth"
 
 export const authOptions: NextAuthOptions = config
 
-export default NextAuth(authOptions)
+const handler = NextAuth(authOptions)
 
-
-
+export { handler as GET, handler as POST }
