@@ -1,13 +1,18 @@
-import React from 'react'
+
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '../../ui/sidebar'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { FaBowlFood } from "react-icons/fa6";
-import { RiDrinks2Fill } from "react-icons/ri";
+import {  RiDrinks2Fill } from "react-icons/ri";
+import { MdOutlineDashboard } from "react-icons/md";
 import { TbReport, TbTableSpark } from "react-icons/tb";
 import { Home } from 'lucide-react';
+import SignOutButton from './sign-out-btn';
+import { auth } from '@/lib/auth';
 
-function HomeAppSidebar() {
+
+ async function HomeAppSidebar() {
+  const session = await auth()
   return (
     <Sidebar variant="inset" className='p-4'>
       <SidebarHeader>
@@ -16,6 +21,14 @@ function HomeAppSidebar() {
         <SidebarContent>
             <SidebarGroup>
               <SidebarMenu>
+                {session?.user.role === 'admin' && <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href={'/dashboard'}>
+                      <MdOutlineDashboard />
+                      <span>Dashboard</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>}
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
                     <Link href={'/'}>
@@ -60,7 +73,7 @@ function HomeAppSidebar() {
             </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-          <Button variant={'secondary'}>avatar</Button>
+          <SignOutButton />
         </SidebarFooter>
     </Sidebar>
   )

@@ -1,7 +1,7 @@
 'use server'
 
-import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { signIn } from "../auth";
 
 type StateType = {
     username: string;

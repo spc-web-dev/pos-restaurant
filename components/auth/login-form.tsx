@@ -9,16 +9,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { Alert, AlertTitle } from "../ui/alert";
 import { AlertCircleIcon } from "lucide-react";
+import { loginAction } from "@/lib/actions/login-action";
 
-type StateType = {
-    username: string;
-    password: string;
-}
 
 function LoginForm() {
     const initialState = {
@@ -27,23 +22,8 @@ function LoginForm() {
         message: '',
         success:false,
     }
-    const router = useRouter()
-    async function loginAction(currentState: StateType,formData: FormData){
-        const username = formData.get('username') as string
-        const password = formData.get('password') as string
-        const result = await signIn('credentials', { redirect: false, username, password })
-        if(result?.error) return {message: 'Wrong username or password', username, password, success: false }
-        router.push('/')
-        return { message: 'Login successful', username, password, success: true }
-    }
-
     const [state,formAction, isPending] = useActionState(loginAction,initialState)
-    const { data: session } = useSession()
-
-    useEffect(()=>{
-      if(session) router.push('/')
-    },[session])
-
+ 
   return (
     <Card className="w-full max-w-sm">
         <CardHeader>

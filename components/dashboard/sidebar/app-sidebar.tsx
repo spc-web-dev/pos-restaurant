@@ -7,9 +7,9 @@ import {
   IconDashboard,
   IconFileAi,
   IconFileDescription,
+  IconHome,
   IconInnerShadowTop,
   IconReport,
-  IconWaterpolo,
 } from "@tabler/icons-react";
 
 import { NavDocuments } from "@/components/dashboard/sidebar/nav-documents";
@@ -38,6 +38,11 @@ const data = {
       title: "Dashboard",
       url: "#",
       icon: IconDashboard,
+    },
+    {
+      title: "Homepage",
+      url: "/",
+      icon: IconHome,
     },
     {
       title: "Products",
