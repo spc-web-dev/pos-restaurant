@@ -27,6 +27,7 @@ import {
 import { IoFastFoodOutline } from "react-icons/io5";
 import { RiDrinks2Line, RiPrinterLine, RiTableLine, RiUserSettingsLine } from "react-icons/ri";
 
+
 const data = {
   user: {
     name: "shadcn",

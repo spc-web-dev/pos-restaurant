@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Providers from "@/components/session-provider";
 import { auth } from "@/lib/auth";
+import ReduxProvider from "@/components/redux-provider";
 
 
 
@@ -42,7 +43,9 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <ReduxProvider>
+              {children}
+            </ReduxProvider>
           </ThemeProvider>
         </Providers>
       </body>
