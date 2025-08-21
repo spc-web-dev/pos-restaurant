@@ -1,10 +1,13 @@
 import TableContainer from '@/components/homepage/tables/table-container'
+import { getTables } from '@/lib/actions/tables-action';
 
 
-function page() {
+
+async function page() {
+  const tables = await getTables();
   return (
     <div>
-      <TableContainer />
+        <TableContainer tables={tables} />
     </div>
   )
 }

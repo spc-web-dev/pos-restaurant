@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Providers from "@/components/session-provider";
 import { auth } from "@/lib/auth";
 import ReduxProvider from "@/components/redux-provider";
-
+import { Toaster } from "@/components/ui/sonner";
 
 
 
@@ -45,6 +45,7 @@ export default async function RootLayout({
           >
             <ReduxProvider>
               {children}
+              <Toaster />
             </ReduxProvider>
           </ThemeProvider>
         </Providers>

@@ -1,11 +1,15 @@
 import React from 'react'
 import TableCard from './table-card'
+import { tableSchema } from '@/lib/types'
+import z from 'zod'
 
-function TableContainer() {
+function TableContainer({ tables }: {
+  tables: z.infer<typeof tableSchema>[]
+}) {
   return (
     <div className='flex flex-wrap gap-4 justify-center w-full'>
-      {Array.from({ length: 15 }).map((_, index) => (
-        <TableCard key={index} />
+      {tables.map((table) => (
+        <TableCard key={table.id} props={table} />
       ))}
     </div>
   )

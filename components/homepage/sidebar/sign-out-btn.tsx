@@ -5,7 +5,12 @@ import React from 'react'
 
 function SignOutButton() {
   return (
-    <Button variant={'secondary'} onClick={()=> signOut()} className='cursor-pointer'>Sign Out</Button>
+    <Button variant={'secondary'} onClick={()=> {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("orderItems");
+      }
+      signOut()
+    }} className='cursor-pointer'>Sign Out</Button>
   )
 }
 
