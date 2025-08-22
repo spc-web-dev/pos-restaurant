@@ -4,6 +4,7 @@ import * as React from "react"
 import { getTables } from "@/lib/actions/tables-action"
 import z from "zod"
 import { tableSchema } from "@/lib/types"
+import { toast } from "sonner"
 
 
 export default function SelectTable({setTableId }: { setTableId: React.Dispatch<React.SetStateAction<number | 0>> }) {
@@ -11,8 +12,15 @@ export default function SelectTable({setTableId }: { setTableId: React.Dispatch<
 
   React.useEffect(()=>{
     const fetchTables = async () => {
-      const res = await getTables()
-      setTables(res)
+      const {data, message, error} = await getTables()
+      if (data.length === 0 && error) {
+        setTables([])
+        toast.error("Failed to fetch tables",{
+          description: message
+        })
+        return
+      }
+      setTables(data)
     }
     fetchTables()
   }, [])

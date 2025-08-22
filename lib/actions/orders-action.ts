@@ -3,12 +3,10 @@
 import { auth } from "../auth";
 
 export const addOrderWithItems = async ({
-  user_id,
   table_id,
   order_type,
   items,
 }: {
-  user_id: number;
   table_id: number;
   order_type: "dine-in" | "take-away" | "delivery";
   items: Array<{
@@ -27,7 +25,7 @@ export const addOrderWithItems = async ({
         Authorization: `Bearer ${session?.user.accessToken}`,
       },
       body: JSON.stringify({
-        user_id,
+        user_id: session?.user.id,
         table_id,
         order_type,
         items,

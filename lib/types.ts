@@ -23,3 +23,10 @@ export const tableSchema = z.object({
     createdAt: z.date(),
     updatedAt: z.date(),
 })
+
+
+export type TableResponseType = {
+    message: string;
+    error: boolean;
+    data: z.infer<typeof tableSchema>[];
+}

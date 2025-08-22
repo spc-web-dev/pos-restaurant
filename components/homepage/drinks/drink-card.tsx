@@ -6,9 +6,11 @@ import AddDrinkToCart from "./add-drink-to-cart";
 import z from "zod";
 import { productSchema } from "@/lib/types";
 
+
 type Props = z.infer<typeof productSchema>
 
 function DrinkCard({ props }: { props: Props }) {
+
   return (
     <Card className="max-w-sm">
       <CardHeader className="hidden">

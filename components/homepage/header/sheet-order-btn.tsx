@@ -21,9 +21,9 @@ import { Separator } from "@/components/ui/separator";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { addOrderWithItems } from "@/lib/actions/orders-action";
-import { useSession } from "next-auth/react";
 import SelectTable from "./select-table";
 import { useAppDispatch } from "@/lib/redux/hooks";
+
 
 function SheetOrderButton({
   orderItems,
@@ -37,10 +37,8 @@ function SheetOrderButton({
   >("");
 
   const [isPending, startTransition] = useTransition();
-  const { data: session } = useSession();
-  const [tableId, setTableId] = useState<number | 0>(0);
+  const [tableId, setTableId] = useState<number>(0);
   const dispatch = useAppDispatch()
-
   const handleCheckOutOrder = async () => {
     if(orderType === "") {
       toast.error("Please select an order type", {
@@ -54,12 +52,8 @@ function SheetOrderButton({
       });
       return
     }
-    if(orderType !== 'dine-in') {
-      setTableId(0);
-    }
     startTransition(async()=>{
       const { message, error } = await addOrderWithItems({
-        user_id: Number(session?.user.id),
         table_id: tableId,
         order_type: orderType,
         items: orderItems.map((item) => ({
@@ -67,6 +61,7 @@ function SheetOrderButton({
           quantity: item.quantity,
           unit_price: item.unit_price,
         })),
+      
       });
       if (error) {
         toast.error(message);
@@ -119,7 +114,7 @@ function SheetOrderButton({
               Total Khmer: {formatToKHRCurrency(exchangeUSDtoKHR(totalPrice))}
             </p>
             <Separator className="my-4" />
-            <RadioOrderType setOrderType={setOrderType} orderType={orderType} />
+            <RadioOrderType setOrderType={setOrderType} orderType={orderType} setTableId={setTableId} />
             {orderType === 'dine-in' && (<>
               <Separator className="my-4" />
             <SelectTable setTableId={setTableId} />
@@ -129,7 +124,7 @@ function SheetOrderButton({
             variant={"outline"}
             className="w-full cursor-pointer"
             onClick={handleCheckOutOrder}
-            disabled={isPending}
+            disabled={isPending || orderItems.length === 0}
           >
             {isPending ? "Placing Order..." : "Checkout"}
           </Button>
